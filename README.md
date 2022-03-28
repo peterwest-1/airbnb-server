@@ -1,8 +1,12 @@
 # Backend Boilerplate
 
-Server boilerplate using TypeORM TypeGraphQL Apollo Redis GraphQL Postgres
+Server boilerplate using TypeORM TypeGraphQL Apollo Redis GraphQL Postgres.
+
+
 
 ## Installation
+
+* Requires `Redis` and `Postgres`
 
 * Clone repository
 
@@ -21,6 +25,10 @@ cd backend-boilerplate
 ```
 yarn
 ```
+
+* Create database and change config in `src/data-source.ts` accordingly
+
+
 
 ## Usage
 
