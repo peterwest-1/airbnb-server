@@ -36,6 +36,7 @@ export class RegisterResolver {
         };
       }
     }
+
     await sendEmail(data.email, await createConfirmationLink(context.url, user?.id as string));
 
     return { user };

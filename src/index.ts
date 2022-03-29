@@ -1,3 +1,4 @@
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
 import express from "express";
@@ -21,10 +22,11 @@ const main = async () => {
 
   const app = express();
 
+  app.set("trust proxy", 1);
   app.use(
     cors({
       credentials: true,
-      origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+      origin: process.env.CORS_ORIGIN,
     })
   );
 
@@ -52,12 +54,12 @@ const main = async () => {
   const server = new ApolloServer({
     schema: schema,
     context: ({ req, res }) => ({ req, res, url: req.protocol + "://" + req.get("host") }),
-    // plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
   });
 
   await server.start();
   app.use(graphqlUploadExpress());
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   app.listen(4000, () => {
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);

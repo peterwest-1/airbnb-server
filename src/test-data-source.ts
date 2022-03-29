@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { User } from "./entity/User";
 
 import { DataSource } from "typeorm";
+import { Property } from "./entity/Property";
 
 require("dotenv").config();
 
@@ -15,7 +16,7 @@ export const testDataSource = (drop: boolean = false) =>
     database: "backend-boiler-test",
     synchronize: drop,
     dropSchema: drop,
-    entities: [User],
+    entities: [User, Property],
     migrations: [],
     subscribers: [],
   });
